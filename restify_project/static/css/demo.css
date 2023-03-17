@@ -1,0 +1,328 @@
+/* --index.css--------------------------------------------- */
+body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  padding: 30px 0;
+}
+
+.navbar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-weight: bold;
+}
+
+.nav-link {
+  color: #333;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover {
+  color: #fff;
+  background-color: #333;
+  border-radius: 0.25rem;
+}
+
+.dropdown-item {
+  color: #333;
+  font-weight: bold;
+}
+
+.dropdown-item:hover {
+  color: #fff;
+  background-color: #333;
+  border-radius: 0.25rem;
+}
+
+.fa-bell {
+  color: #333;
+  font-size: 1.2rem;
+  padding-right: 0.5rem;
+}
+
+.container my-5{
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+form {
+  padding: 30px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.form-text {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: #fff;
+  border: 0;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  background-color: #555;
+}
+
+.btn-details {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  color: #fff;
+}
+
+.container.notification {
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.form-check {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.form-notification {
+  text-align: left;
+  margin-top: 20px;
+}
+
+#order-by {
+  width: 200px;
+  margin-top: 10px;
+}
+
+label {
+  font-weight: bold;
+}
+
+
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+footer {
+  bottom: 0;
+  background-color: black;
+  color: black;
+  height: 2rem;
+  text-align: center;
+  line-height: 2rem;
+  width: 100%;
+}
+
+.container-fluid{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content{
+  flex:1;
+}
+
+/* -----search result-------------------------------*/
+.container {
+  background-color: #f5f5f5;
+  padding: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.btn-details {
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-details:hover {
+  background-color: #0069d9;
+  cursor: pointer;
+}
+
+/* --notifications.html--------------------------------------------- */
+  /* Container styles */
+  .container.notification {
+    margin-bottom: 20px;
+    width: 80%;
+        text-align: center;
+  }
+
+  /* Filter Notifications styles */
+  .form-check.form-check-inline {
+    margin-right: 10px;
+  }
+
+  /* Sort Notifications styles */
+  .form-notification {
+    margin-bottom: 20px;
+  }
+
+  /* Notification Cards styles */
+  .card-notification {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .card-notification .card {
+    width: calc(33.33% - 10px);
+    margin-bottom: 20px;
+  }
+
+  .card-header {
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .card-header .font-weight-bold {
+    font-size: 18px;
+  }
+
+  .card-header .float-right {
+    font-size: 14px;
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+
+      .notification {
+        margin-top: 50px;
+      }
+
+      /**/
+  .stars {
+    display: inline-block;
+  }
+  .fa-star {
+    color: orange;
+    cursor: pointer;
+  }
+  .fa-star:hover {
+    color: gold;
+  }
+    .review {
+    background-color: lightgray;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+  .rating {
+    color: orange;
+    font-size: 20px;
+  }
+  .container-property {
+    background-color: lightgray;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .form-group-comments {
+    margin-bottom: 20px;
+  }

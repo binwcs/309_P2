@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <title>Restify</title>
+</head>
+<body>
+    <div class="container my-6">
+        <h1 class="text-center">My Rental Units</h1>
+        <form class="form-inline my-3">
+            <div class="form-group mr-2">
+                <label for="location">Location:</label>
+                <select class="form-control mx-2" id="location">
+                    <option value="">All</option>
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="Toronto">Toronto</option>
+                </select>
+            </div>
+            <div class="form-group mr-2">
+                <label for="guests">Number of Guests:</label>
+                <select class="form-control mx-2" id="guests">
+                    <option value="">All</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+            <div class="form-group mr-2">
+                <label for="start">Start Date:</label>
+                <input type="date" class="form-control mx-2" id="start">
+            </div>
+            <div class="form-group mr-2">
+                <label for="end">End Date:</label>
+                <input type="date" class="form-control mx-2" id="end">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Number of Guests</th>
+                <th>Price per Night</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>123 Main St</td>
+                <td>San Francisco</td>
+                <td>CA</td>
+                <td>94107</td>
+                <td>2</td>
+                <td>$100</td>
+                <td>
+                    <a href="property.html" class="btn btn-primary">View Details</a>
+                </td>
+            </tr>
+<tr>
+    <td>2</td>
+    <td>456 Market St</td>
+    <td>San Francisco</td>
+    <td>CA</td>
+    <td>94111</td>
+    <td>4</td>
+    <td>$200</td>
+    <td>
+        <a href="property.html" class="btn btn-primary">View Details</a>
+    </td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>789 Yonge St</td>
+    <td>Toronto</td>
+    <td>ON</td>
+    <td>M4W 2G8</td>
+    <td>2</td>
+    <td>$150</td>
+    <td>
+        <a href="property.html" class="btn btn-primary">View Details</a>
+    </td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>10 Queen's Quay W</td>
+    <td>Toronto</td>
+    <td>ON</td>
+    <td>M5J 2R9</td>
+    <td>3</td>
+    <td>$250</td>
+    <td>
+        <a href="property.html" class="btn btn-primary">View Details</a>
+    </td>
+</tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

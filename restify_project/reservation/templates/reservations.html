@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Restify</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU0X6jKGysX7Lh6SUStGn7Iu6BkIxV7r53KaDk3W2J2Xw1"
+      crossorigin="anonymous"
+    />
+    <!-- Fontawesome CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+      integrity="sha384-LrJ+stERNIoGbhSkRYotT6yXdtXGxvvgTbTbfu2YxEUuh7s2Qv+r0ItzVJ+eRYbl"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/demo.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Restify</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reservation.html">My Reservation</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="property.html"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              My Rental Units
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="property.html">Rental List</a>
+              <a class="dropdown-item" href="property-comments.html"
+                >Comments Page</a
+              >
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="log_in.html"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="log_in.html">Log in</a>
+<div class="dropdown-divider"></div>
+<a class="dropdown-item" href="my_profile.html">My Profile</a>
+<a class="dropdown-item" href="user_comment_system.html"
+             >User Comment System</a
+           >
+</div>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="log_out.html">Log Out</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="notifications.html">
+<i class="fas fa-bell"></i> Notifications
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Reservation Table -->
+<div class="container reservation">
+  <h2 class="text-center font-weight-bold">My Reservation</h2>
+  <table class="table reservation">
+    <thead>
+      <tr>
+        <th>Reservation ID</th>
+        <th>Hotel</th>
+        <th>Check-in</th>
+        <th>Check-out</th>
+        <th>Details</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for reservation in reservations %}
+      <tr>
+        <td>#{{ reservation.id }}</td>
+        <td>{{ reservation.hotel_name }}</td>
+        <td>{{ reservation.check_in }}</td>
+        <td>{{ reservation.check_out }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-info btn-sm mr-3"
+            data-toggle="modal"
+            data-target="#reservationModal{{ reservation.id }}"
+          >
+            Details
+          </button>
+        </td>
+        <td>
+          <a href="{% url 'cancel_reservation' reservation.id %}"
+            class="btn btn-danger btn-sm"
+            >Cancel</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Reservation Modals -->
+{% for reservation in reservations %}
+<div
+  class="modal fade"
+  id="reservationModal{{ reservation.id }}"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="reservationModalLabel{{ reservation.id }}"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5
+          class="modal-title"
+          id="reservationModalLabel{{ reservation.id }}"
+        >
+          Reservation Details
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <img
+              src="{{ reservation.hotel_image.url }}"
+              class="img-fluid"
+            />
+          </div>
+          <div class="col-md-7">
+            <ul class="list-group">
+              <li class="list-group-item font-weight-bold">
+                Reservation ID: #{{ reservation.id }}
+              </li>
+              <li class="list-group-item">
+                Hotel: {{ reservation.hotel_name }}
+              </li>
+              <li class="list-group-item">
+                Client Name: {{ reservation.user.get_full_name }}
+              </li>
+              <li class="list-group-item">
+                Email: {{ reservation.user.email }}
+              </li>
+              <li class="list-group-item">
+                Check-in: {{ reservation.check_in }}
+              </li>
+              <li class="list-group-item">
+                Check-out: {{ reservation.check_out }}
+              </li>
+              <li class="list-group-item">
+                Room Type: {{ reservation.room_type }}
+              </li>
+              <li class="list-group-item">
+                Number of Rooms: {{ reservation.num_rooms }}
+              </li>
+              <li class="list-group-item">
+                Number of Guests: {{ reservation.num_guests }}
+              </li>
+              <li class="list-group-item">
+                Total Price: ${{ reservation.total_price }}
+              </li>
+      </ul></div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+<!-- Scripts -->
+<!-- jQuery CDN -->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+  crossorigin="anonymous"
+></script>
+<!-- Bootstrap JS CDN -->
+<script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-GnKXfZ+rV5S5A5q5k5cb+0W4EhEH+d4XaFsjfC0aqjhRwFVfTkZBKhgA0z1PlQsr"
+  crossorigin="anonymous"
+></script>
+<!-- Custom JS -->
+<script src="js/demo.js"></script>
+</body>
+</html>

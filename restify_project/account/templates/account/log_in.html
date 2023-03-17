@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/demo.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}">
+    <title>Restify</title>
+    <style>
+      .container {
+        max-width: 600px;
+        margin: 50px auto;
+      }
+      form {
+        margin-bottom: 20px;
+      }
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Login Form -->
+      <form id="login-form" class="needs-validation" novalidate>
+        <h2 class="text-center">Login</h2>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" required>
+          <div class="invalid-feedback">
+            Please enter your username.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" required>
+          <div class="invalid-feedback">
+            Please enter your password.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <button id="sign-up-btn" type="button" class="btn btn-secondary">Sign Up</button>
+        <button id="forgot-password-btn" type="button" class="btn btn-link">Forgot Password</button>
+      </form>
+      <!-- Sign Up Form -->
+      <form id="sign-up-form" style="display: none;" class="needs-validation" novalidate>
+        <h2 class="text-center">Sign Up</h2>
+        <div class="form-group">
+          <label for="sign-up-username">Username</label>
+          <input type="text" class="form-control" id="sign-up-username" required>
+          <div class="invalid-feedback">
+            Please enter your username.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sign-up-password">Password</label>
+          <input type="password" class="form-control" id="sign-up-password" required>
+          <div class="invalid-feedback">
+            Please enter your password.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="sign-up-confirm-password">Confirm Password</label>
+          <input type="password" class="form-control" id="sign-up-confirm-password" required>
+          <div class="invalid-feedback">
+            Please confirm your password.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button id="back-to-login-btn-2" class="btn btn-secondary">Back to Login</button>
+      </form>
+
+      <!-- Forgot Password Form -->
+      <form id="forgot-password-form" style="display: none;" class="needs-validation" novalidate>
+        <h2 class="text-center">Forgot Password</h2>
+        <div class="form-group">
+          <label for="forgot-password-email">Email</label>
+          <input type="email" class="form-control" id="forgot-password-email" required>
+          <div class="invalid-feedback">
+            Please enter your email.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Reset Password</button>
+        <button id="back-to-login-btn" class="btn btn-secondary">Back to Login</button>
+      </form>
+    </div>
+  </body>
+    <script>
+$(document).ready(function () {
+// 注册表单
+$("#register-form").submit(function (event) {
+  event.preventDefault();
+  const username = $("#register-username").val();
+  const password = $("#register-password").val();
+  const email = $("#register-email").val();
+
+  $.ajax({
+    url: "/api/signup/",
+    method: "POST",
+    data: {
+      username: username,
+      password: password,
+      email: email,
+    },
+    success: function (response) {
+      alert("注册成功，请登录。");
+      // 将注册成功的用户名和密码存储到localStorage中
+      localStorage.setItem("registeredUsername", username);
+      localStorage.setItem("registeredPassword", password);
+    },
+    error: function (response) {
+      alert("注册失败，请检查您的信息。");
+    },
+  });
+});
+
+// 登录表单
+$("#login-form").submit(function (event) {
+  event.preventDefault();
+  const username = $("#username").val();
+  const password = $("#password").val();
+
+  // 从localStorage中获取注册成功的用户名和密码
+  const registeredUsername = localStorage.getItem("registeredUsername");
+  const registeredPassword = localStorage.getItem("registeredPassword");
+
+  // 检查登录的用户名和密码是否和注册的相同
+  if (username === registeredUsername && password === registeredPassword) {
+    // 如果相同，则登录成功
+    localStorage.setItem("access_token", "fake_token");
+    localStorage.setItem("refresh_token", "fake_token");
+    window.location.href = "/profile.html";
+  } else {
+    // 如果不相同，则登录失败
+    alert("登录失败，请检查您的用户名和密码。");
+  }
+});
+
+  // 忘记密码表单
+  $("#forgot-password-form").submit(function (event) {
+    event.preventDefault();
+    const email = $("#forgot-password-email").val();
+
+    $.ajax({
+      url: "/api/forgot-password/",
+      method: "POST",
+      data: {
+        email: email,
+      },
+      success: function (response) {
+        alert("密码重置邮件已发送，请检查您的邮箱。");
+      },
+      error: function (response) {
+        alert("发送失败，请检查您的邮箱。");
+      },
+    });
+  });
+        // Show sign up form
+      $("#sign-up-btn").click(function () {
+        $("#login-form").hide();
+        $("#sign-up-form").show();
+      });
+
+      // Show forgot password form
+      $("#forgot-password-btn").click(function () {
+        $("#login-form").hide();
+        $("#forgot-password-form").show();
+      });
+
+      // Back to login form from sign up form
+      $("#back-to-login-btn-2").click(function () {
+        $("#sign-up-form").hide();
+        $("#login-form").show();
+      });
+
+      // Back to login form from forgot password form
+      $("#back-to-login-btn").click(function () {
+        $("#forgot-password-form").hide();
+        $("#login-form").show();
+      });
+});
+    </script>
+</html>
